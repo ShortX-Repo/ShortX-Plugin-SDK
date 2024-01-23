@@ -26,7 +26,7 @@
             android:value="This is a demo plugin." />
 
         <meta-data
-            android:name="shortx.plugin.action.entry"
+            android:name="shortx.plugin.action.evaluator.entry"
             android:value="shortx.pluginsdk.demo.evaluator.DemoActionEvaluator" />
 
         <activity
