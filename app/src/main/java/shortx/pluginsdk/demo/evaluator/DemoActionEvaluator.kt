@@ -1,20 +1,21 @@
 package shortx.pluginsdk.demo.evaluator
 
-import android.content.Context
 import android.widget.Toast
-import androidx.annotation.Keep
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import shortx.plugin.ActionEvaluator
-import shortx.plugin.ParamsData
 
-@Keep
-class DemoActionEvaluator : ActionEvaluator() {
-    override fun evaluate(androidContext: Context, paramsData: ParamsData) {
-        with(paramsData) {
-            Toast.makeText(
-                androidContext,
-                "Hello, ${getStringDataOrDefault("input", "N/A")}",
-                Toast.LENGTH_LONG
-            ).show()
+class DemoActionEvaluator : ActionEvaluator {
+
+    override suspend fun evaluate(input: ActionEvaluator.Input) {
+        withContext(Dispatchers.Main) {
+            with(input) {
+                Toast.makeText(
+                    androidContext,
+                    "Hello, ${paramsData.getStringDataOrDefault("input", "N/A")}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 }

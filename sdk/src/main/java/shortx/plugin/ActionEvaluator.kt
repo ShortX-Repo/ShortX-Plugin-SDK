@@ -3,11 +3,13 @@ package shortx.plugin
 import android.content.Context
 import androidx.annotation.Keep
 
-@Keep
-abstract class ActionEvaluator {
-    fun invokeEvaluate(androidContext: Context, paramsData: ByteArray) {
-        evaluate(androidContext, ParamsData.parseFrom(paramsData))
-    }
+interface ActionEvaluator {
+    data class Input(
+        val androidContext: Context,
+        val contextData: Map<String, String>,
+        val paramsData: ParamsData
+    )
 
-    abstract fun evaluate(androidContext: Context, paramsData: ParamsData)
+    @Keep
+    suspend fun evaluate(input: Input)
 }
