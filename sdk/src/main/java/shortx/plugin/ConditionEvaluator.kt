@@ -10,6 +10,8 @@ interface ConditionEvaluator {
         val paramsData: ParamsData
     )
 
+    data class Result(val match: Boolean, val reason: String? = null)
+
     @Keep
-    suspend fun evaluate(input: Input)
+    suspend fun evaluate(input: Input): Result
 }
